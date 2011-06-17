@@ -233,8 +233,9 @@ class Object
 
         void ApplyPercentModFloatValue(uint16 index, float val, bool apply)
         {
-            val = val != -100.0f ? val : -99.9f ;
-            SetFloatValue(index, GetFloatValue(index) * (apply?(100.0f+val)/100.0f : 100.0f / (100.0f+val)));
+            float value = GetFloatValue(index);
+            ApplyPercentModFloatVar(value, val, apply);
+            SetFloatValue(index, value);
         }
 
         void SetFlag(uint16 index, uint32 newFlag);
@@ -339,10 +340,10 @@ class Object
 
         void _InitValues();
         void _Create (uint32 guidlow, uint32 entry, HighGuid guidhigh);
+        std::string _ConcatFields(uint16 startIndex, uint16 size) const;
         void _LoadIntoDataField(const char* data, uint32 startOffset, uint32 count);
 
         virtual void _SetUpdateBits(UpdateMask *updateMask, Player *target) const;
-
         virtual void _SetCreateBits(UpdateMask *updateMask, Player *target) const;
         void _BuildMovementUpdate(ByteBuffer * data, uint16 flags) const;
         void _BuildValuesUpdate(uint8 updatetype, ByteBuffer *data, UpdateMask *updateMask, Player *target) const;
@@ -472,7 +473,6 @@ struct Position
     bool IsInDist(const Position *pos, float dist) const
         { return GetExactDistSq(pos) < dist * dist; }
     bool HasInArc(float arcangle, const Position *pos) const;
-    bool HasInArc(const float arcangle, const float x, const float y) const;
     bool HasInLine(const Unit *target, float distance, float width) const;
     std::string ToString() const;
 };
@@ -687,7 +687,6 @@ class WorldObject : public Object, public WorldLocation
             float d = GetExactDist2d(x, y) - GetObjectSize();
             return d > 0.0f ? d : 0.0f;
         }
-        float GetDistanceSqr(float x, float y, float z) const;
         float GetDistanceZ(const WorldObject* obj) const;
 
         bool IsInMap(const WorldObject* obj) const

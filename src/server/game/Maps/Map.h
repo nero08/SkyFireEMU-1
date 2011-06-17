@@ -68,11 +68,10 @@ struct ScriptAction
 // Map file format defines
 //******************************************
 #define MAP_MAGIC             'SPAM'
-#define MAP_VERSION_MAGIC     '1.2v'
+#define MAP_VERSION_MAGIC     '1.1v'
 #define MAP_AREA_MAGIC        'AERA'
 #define MAP_HEIGHT_MAGIC      'TGHM'
 #define MAP_LIQUID_MAGIC      'QILM'
-
 
 struct map_fileheader
 {
@@ -85,8 +84,6 @@ struct map_fileheader
     uint32 heightMapSize;
     uint32 liquidMapOffset;
     uint32 liquidMapSize;
-    uint32 holesOffset;
-    uint32 holesSize;
 };
 
 #define MAP_AREA_NO_AREA      0x0001
@@ -602,7 +599,7 @@ class InstanceMap : public Map
         void UnloadAll();
         bool CanEnter(Player* player);
         void SendResetWarnings(uint32 timeLeft) const;
-        void SetResetSchedule(bool on);
+        void SetResetSchedule(bool on, Player* player);
 
         uint32 GetMaxPlayers() const;
         uint32 GetMaxResetDelay() const;
