@@ -4423,6 +4423,11 @@ void SpellMgr::LoadSpellCustomAttr()
 			spellInfo->EffectApplyAuraName[1] = SPELL_AURA_MOD_POWER_REGEN;
 			count++;
 			break;
+		case 86150: // Guardian of Ancient Kings
+			spellInfo->EffectTriggerSpell[0] = 86698;
+			spellInfo->EffectImplicitTargetA[0] = TARGET_UNIT_CASTER;
+			count++;
+			break;
         default:
             break;
         }
