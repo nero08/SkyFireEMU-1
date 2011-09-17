@@ -6861,6 +6861,19 @@ void Spell::EffectCharge(SpellEffIndex /*effIndex*/)
     // not all charge effects used in negative spells
     if (!IsPositiveSpell(m_spellInfo->Id) && m_caster->GetTypeId() == TYPEID_PLAYER)
         m_caster->Attack(target, true);
+	    switch(m_spellInfo->Id)
+    {
+        case 16979:  //feral charge (bear)
+        {
+            //stampede
+            if (m_caster->HasAura(78892))
+                m_caster->CastSpell(m_caster,81016,true);
+            else
+                if (m_caster->HasAura(78893))
+                    m_caster->CastSpell(m_caster,81017,true);
+        }
+        break;
+    }
 }
 
 void Spell::EffectChargeDest(SpellEffIndex /*effIndex*/)
