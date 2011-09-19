@@ -4090,6 +4090,10 @@ void SpellMgr::LoadSpellCustomAttr()
             spellInfo->MaxAffectedTargets = 15;
             count++;
             break;
+		case 81913: case 81914: //Die by the Sword
+            spellInfo->EffectTriggerSpell[0] = 0;
+            count++;
+            break;
         case 38794: case 33711: //Murmur's Touch
             spellInfo->MaxAffectedTargets = 1;
             spellInfo->EffectTriggerSpell[0] = 33760;
@@ -4268,6 +4272,17 @@ void SpellMgr::LoadSpellCustomAttr()
 			spellInfo->MaxAffectedTargets = 5;
 			count++;
 			break;
+		case 61216:
+        case 61221:
+            spellInfo->EffectTriggerSpell[0] = 0;
+            count++;
+            break;
+		case 46913:
+        case 46914:
+        case 46915:
+            spellInfo->EffectTriggerSpell[0] = 0;
+            count++;
+            break;
         case 26573 : //Consecration
             spellInfo->EffectTriggerSpell[1] = 82366;
             spellInfo->EffectTriggerSpell[2] = 36946;
@@ -4330,6 +4345,10 @@ void SpellMgr::LoadSpellCustomAttr()
             break;
         case 63675: // Improved Devouring Plague
             spellInfo->AttributesEx3 |= SPELL_ATTR3_NO_DONE_BONUS;
+            count++;
+            break;
+		case 33206: // Pain Suppression
+            spellInfo->AttributesEx5 &= ~SPELL_ATTR5_USABLE_WHILE_STUNNED;
             count++;
             break;
         case 81782: // Power Word : Barrier
