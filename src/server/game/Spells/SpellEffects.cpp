@@ -1582,12 +1582,7 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
                         m_caster->CastSpell(m_caster, 92822, true);
                     if (m_caster->getLevel() == 85)
                         m_caster->CastSpell(m_caster, 92727, true);
-                    break;
-				}
-				case 55342: // Mirror Image
-				{
-                    m_caster->CastSpell(m_caster, 58832, true);
-					break;
+                    break;						
                 }
                 case 82731: // Flame Orb
                 {
