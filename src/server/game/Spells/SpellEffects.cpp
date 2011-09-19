@@ -2633,6 +2633,150 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
     //For some funky reason, some spells have to be cast as a spell on the enemy even if they're supposed to apply an aura.
     switch (m_spellInfo->SpellFamilyName)
     {
+		        case SPELLFAMILY_HUNTER:
+        {
+            if(Aura* aur = m_caster->GetAura(82925))
+            {
+                if(aur->GetStackAmount() >= 5)
+                {
+                    m_caster->AddAura(82926, m_caster);
+                    int castingTime = -101;
+                    m_caster->ToPlayer()->ApplySpellMod(19434, SPELLMOD_CASTING_TIME, castingTime);
+                    m_caster->RemoveAurasDueToSpell(82925);
+                }
+            }
+            if (m_spellInfo->Id == 19578)
+                m_caster->CastSpell(m_caster, 19579, true);
+            else if (m_spellInfo->Id == 20895)
+                m_caster->CastSpell(m_caster, 24529, true);
+            break;
+        }
+        case SPELLFAMILY_WARRIOR:
+        {
+            if (m_spellInfo->Id == 50227)
+                m_caster->ToPlayer()->RemoveSpellCooldown(23922, true);
+            if (m_spellInfo->Id == 52437)
+                m_caster->ToPlayer()->RemoveSpellCooldown(86346, true);
+            break;
+        }
+        case SPELLFAMILY_MAGE:
+        {
+            switch(m_spellInfo->Id)
+            {
+                case 64343:
+                    m_caster->ToPlayer()->RemoveSpellCooldown(2136, true);
+                    break;
+            }
+            break;
+        }
+        case SPELLFAMILY_DRUID:
+        {
+            switch(m_spellInfo->Id)
+            {
+                case 93400:
+                    m_caster->ToPlayer()->RemoveSpellCooldown(78674, true);
+                    break;
+            }
+            break;
+        }
+        case SPELLFAMILY_PALADIN:
+        {
+            switch (m_spellInfo->Id)
+            {
+                case 20164:
+                    m_caster->RemoveAurasDueToSpell(20154);
+                    m_caster->RemoveAurasDueToSpell(20165);
+                    m_caster->RemoveAurasDueToSpell(31801);
+                    break;
+                case 20154:
+                case 20165:
+                case 31801:
+                    m_caster->RemoveAurasDueToSpell(20164);
+                    break;
+            }
+            break;
+        }
+        case SPELLFAMILY_PRIEST:
+        {
+            switch (m_spellInfo->Id)
+            {
+                case 73413:
+                    m_caster->RemoveAurasDueToSpell(588);
+                    break;
+                case 588:
+                    m_caster->RemoveAurasDueToSpell(73413);
+                    break;
+            }
+
+            if (m_spellInfo->Id == 589 || m_spellInfo->Id == 15407)
+            {
+                if (m_caster->HasSpell(95740))
+                {
+                    int chance = 10;
+
+                    if (m_caster->HasAura(33191))
+                        chance += 4;
+                    else if(m_caster->HasAura(78228))
+                        chance += 8;
+
+                    if (roll_chance_i(chance))
+                        m_caster->CastSpell(m_caster, 77487, true);
+                }
+            }
+
+            //Dark Evangelism
+            if (m_caster->HasAura(81659)) // Rank 1
+            {
+                if (m_spellInfo->Id == 15407)      // Dark Evangelism from Mind Flay
+                    m_caster->CastSpell(m_caster,87117,true);
+            }
+            else if (m_caster->HasAura(81662)) // Rank 2
+            {
+                if (m_spellInfo->Id == 15407)      // Dark Evangelism from Mind Flay
+                    m_caster->CastSpell(m_caster,87118,true);
+            }
+            break;
+        }
+        case SPELLFAMILY_WARLOCK:
+        {
+            switch (m_spellInfo->Id)
+            {
+                case 689:
+                case 1120:
+                case 48181:
+                {
+                    uint32 chance = 0;
+
+                    if (m_caster->HasSpell(47201))
+                        chance = 33;
+                    else if(m_caster->HasSpell(47202))
+                        chance = 66;
+                    else if(m_caster->HasSpell(47203))
+                        chance = 100;
+
+                    if (roll_chance_i(chance))
+                        m_caster->CastSpell(unitTarget, 47422, true);
+                }
+                break;
+                case 91713:
+                {
+                    if(m_caster->HasAura(28176) || m_caster->HasAura(687))
+                    {
+                        int bp0 = (3551 + (m_caster->SpellBaseDamageBonus(SPELL_SCHOOL_MASK_SHADOW) * 0.807));
+                        m_caster->CastCustomSpell(m_caster, 91711, &bp0, NULL, NULL, false);
+                    }
+                }
+                break;
+                case 48020: // Demonic Circle
+                {
+                    if (GameObject* obj = unitTarget->GetGameObject(48018))
+                    {
+                        unitTarget->NearTeleportTo(obj->GetPositionX(), obj->GetPositionY(), obj->GetPositionZ(), obj->GetOrientation());
+                        unitTarget->RemoveMovementImpairingAuras();
+                    }
+                }
+                break;
+        }
         case SPELLFAMILY_ROGUE:
         {
             if (m_spellInfo->SpellFamilyFlags[0] == 0x8)    //Gouge
