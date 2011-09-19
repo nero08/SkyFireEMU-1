@@ -3765,6 +3765,58 @@ void SpellMgr::LoadSpellCustomAttr()
             spellInfo->StackAmount = 100; // should be inf
             count++;
             break;
+		case 16864:
+            spellInfo->procChance = 10;
+            count++;
+            break;
+        case 87507:
+            spellInfo->Effect[0] = SPELL_EFFECT_LEARN_SPELL;
+            spellInfo->EffectTriggerSpell[0] = 86529;
+            spellInfo->procChance = 100;
+            count++;
+            break;
+        case 80388:
+            spellInfo->Effect[0] = SPELL_EFFECT_LEARN_SPELL;
+            spellInfo->EffectTriggerSpell[0] = 93375;
+            spellInfo->procChance = 100;
+            count++;
+            break;
+        case 87504:
+            spellInfo->Effect[0] = SPELL_EFFECT_LEARN_SPELL;
+            spellInfo->EffectTriggerSpell[0] = 86531;
+            spellInfo->procChance = 100;
+            count++;
+            break;
+        case 87511:
+            spellInfo->Effect[0] = SPELL_EFFECT_LEARN_SPELL;
+            spellInfo->EffectTriggerSpell[0] = 86525;
+            spellInfo->procChance = 100;
+            count++;
+            break;
+        case 79682:
+            spellInfo->Effect[0] = SPELL_EFFECT_LEARN_SPELL;
+            spellInfo->EffectTriggerSpell[0] = 93321;
+            spellInfo->procChance = 100;
+            count++;
+            break;
+        case 87506:
+            spellInfo->Effect[0] = SPELL_EFFECT_LEARN_SPELL;
+            spellInfo->EffectTriggerSpell[0] = 86528;
+            spellInfo->procChance = 100;
+            count++;
+            break;
+        case 87505:
+            spellInfo->Effect[0] = SPELL_EFFECT_LEARN_SPELL;
+            spellInfo->EffectTriggerSpell[0] = 86530;
+            spellInfo->procChance = 100;
+            count++;
+            break;
+        case 87509:
+            spellInfo->Effect[0] = SPELL_EFFECT_LEARN_SPELL;
+            spellInfo->EffectTriggerSpell[0] = 86526;
+            spellInfo->procChance = 100;
+            count++;
+            break;
         case 51514: // Hex
         case 118:   // Polymorph
         case 61305: // Polymorph (other animal)
