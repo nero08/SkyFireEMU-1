@@ -2391,6 +2391,18 @@ void Spell::EffectJump(SpellEffIndex effIndex)
     float speedXY, speedZ;
     CalculateJumpSpeeds(effIndex, m_caster->GetExactDist2d(x, y), speedXY, speedZ);
     m_caster->GetMotionMaster()->MoveJump(x, y, z, speedXY, speedZ);
+
+	//stampede
+    if (m_caster->HasAura(78892))
+    {                                                     //Rank 1
+        if (m_spellInfo->Id == 49376)
+            m_caster->CastSpell(m_caster,81021,true);
+    }
+    if (m_caster->HasAura(78893))
+    {                                                     //Rank 2
+        if (m_spellInfo->Id == 49376)
+            m_caster->CastSpell(m_caster,81022,true);
+    }
 }
 
 void Spell::EffectJumpDest(SpellEffIndex effIndex)
