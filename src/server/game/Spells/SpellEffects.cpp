@@ -1583,6 +1583,11 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
                     if (m_caster->getLevel() == 85)
                         m_caster->CastSpell(m_caster, 92727, true);
                     break;
+				}
+				case 55342: // Mirror Image
+				{
+                    m_caster->CastSpell(m_caster, 58832, true);
+					break;
                 }
                 case 82731: // Flame Orb
                 {
@@ -2633,7 +2638,7 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
     //For some funky reason, some spells have to be cast as a spell on the enemy even if they're supposed to apply an aura.
     switch (m_spellInfo->SpellFamilyName)
     {
-		        case SPELLFAMILY_HUNTER:
+		case SPELLFAMILY_HUNTER:
         {
             if(Aura* aur = m_caster->GetAura(82925))
             {
@@ -2776,14 +2781,8 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
                     }
                 }
                 break;
-        }
-        case SPELLFAMILY_ROGUE:
-        {
-            if (m_spellInfo->SpellFamilyFlags[0] == 0x8)    //Gouge
-            {
-                m_caster->CastSpell(unitTarget, 1776, true);
-                return;
             }
+			break;
         }
     }
     ASSERT(unitTarget == m_spellAura->GetOwner());
@@ -3469,7 +3468,18 @@ void Spell::EffectEnergizePct(SpellEffIndex effIndex)
     uint32 maxPower = unitTarget->GetMaxPower(power);
     if (maxPower == 0)
         return;
-
+	    switch(m_spellInfo->Id)
+    {
+        case 81070:
+            {
+                if (m_caster->HasAura(81061))
+                    damage = 8;
+                else if (m_caster->HasAura(81062))
+                    damage = 16;
+                else
+                    return; //don not work without talent
+            }
+    }
     uint32 gain = damage * maxPower / 100;
     m_caster->EnergizeBySpell(unitTarget, m_spellInfo->Id, gain, power);
 }
@@ -5191,6 +5201,14 @@ void Spell::EffectInterruptCast(SpellEffIndex effIndex)
     if (!unitTarget || !unitTarget->isAlive())
         return;
 
+	    if (m_spellInfo->Id == 6552)
+    {
+        if (m_caster->HasAura(61216))
+            m_caster->CastSpell(m_caster, 86662, true);
+        if (m_caster->HasAura(61221))
+            m_caster->CastSpell(m_caster, 86663, true);
+    }
+
     // TODO: not all spells that used this effect apply cooldown at school spells
     // also exist case: apply cooldown to interrupted cast only and to all spells
     for (uint32 i = CURRENT_FIRST_NON_MELEE_SPELL; i < CURRENT_MAX_SPELL; ++i)
@@ -6229,6 +6247,27 @@ void Spell::EffectScriptEffect(SpellEffIndex effIndex)
                 break;
                 case 693:
                     DoCreateItem(effIndex, 5232);
+                break;
+				    case 77799:
+                    Aura * aura;
+                    if (aura = unitTarget->GetAura(348))
+                    {
+                        int32 duration = aura->GetDuration() + m_spellInfo->EffectBasePoints[1] * IN_MILLISECONDS;
+                        if (duration > aura->GetMaxDuration())
+                            duration = aura->GetMaxDuration();
+                        aura->SetDuration(duration);
+                    }
+                    if (aura = unitTarget->GetAura(30108))
+                    {
+                        int32 duration = aura->GetDuration() + m_spellInfo->EffectBasePoints[1] * IN_MILLISECONDS;
+                        if (duration > aura->GetMaxDuration())
+                            duration = aura->GetMaxDuration();
+                        aura->SetDuration(duration);
+                    }
+                break;
+                case 47422:
+                    if (aura = unitTarget->GetAura(172))
+                        aura->SetDuration(aura->GetMaxDuration());
                 break;
             if (m_spellInfo->Id == 77801) // Demon Soul
             {
