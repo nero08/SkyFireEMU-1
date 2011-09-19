@@ -583,6 +583,50 @@ void Spell::SpellDamageSchoolDmg(SpellEffIndex effIndex)
                     {
                         if (unitTarget->GetAuraEffect(SPELL_AURA_PERIODIC_DAMAGE, SPELLFAMILY_WARLOCK, 0x4, 0, 0))
                             damage += damage/4;
+					}
+					 if(m_caster->HasSpell(17793))
+                        damage += damage * 0.04;
+                    else if(m_caster->HasSpell(17796))
+                        damage += damage * 0.08;
+                    else if(m_caster->HasSpell(17801))
+                        damage += damage * 0.12;
+                }
+                if (m_caster->HasAura(84739) && (GetSpellSchoolMask(m_spellInfo) & SPELL_SCHOOL_MASK_FIRE))
+                    damage *= 1.25f;
+                if (m_spellInfo->Id == 686)
+                {
+                    if(m_caster->HasSpell(17793))
+                        damage += damage * 0.04;
+                    else if(m_caster->HasSpell(17796))
+                        damage += damage * 0.08;
+                    else if(m_caster->HasSpell(17801))
+                        damage += damage * 0.12;
+                }
+                if (m_spellInfo->Id == 6353)
+                {
+                    int32 bp0 = 0;
+                    if(m_caster->HasSpell(18119))
+                        bp0 = 4;
+                    else if(m_caster->HasSpell(18120))
+                        bp0 = 8;
+                }
+				                if(m_spellInfo->Id == 3110)
+                {
+                    if (m_caster->GetTypeId() == TYPEID_UNIT && m_caster->ToCreature()->isPet())
+                    {
+                        if (Unit* owner = m_caster->GetOwner()) // PRUEBAS
+                        {
+                            float multiplier = owner->HasAura(56248) ? 1.2 : 1.0;
+                            damage = ((((owner->SpellBaseDamageBonus(SPELL_SCHOOL_MASK_FIRE) * 0.5) * 0.657) + 124) * multiplier);
+                        }
+                    }
+                }
+                if(m_spellInfo->Id == 7814)
+                {
+                    if (m_caster->GetTypeId() == TYPEID_UNIT && m_caster->ToCreature()->isPet())
+                    {
+                        if (Unit* owner = m_caster->GetOwner())
+                            damage = (183 + (0.612 * (owner->SpellBaseDamageBonus(SPELL_SCHOOL_MASK_SHADOW) * 0.5)));
                     }
                 }
                 // Conflagrate - consumes Immolate
