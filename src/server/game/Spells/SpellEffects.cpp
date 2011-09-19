@@ -7173,6 +7173,18 @@ void Spell::EffectKnockBack(SpellEffIndex effIndex)
 
 void Spell::EffectLeapBack(SpellEffIndex effIndex)
 {
+	    if(m_spellInfo->Id == 781)
+    {
+        int bp0 = 0;
+        if(m_caster->HasAura(83558))
+            bp0 = 15;
+        if(m_caster->HasAura(83560))
+            bp0 = 30;
+
+        if(bp0)
+            m_caster->CastCustomSpell(m_caster, 83559, &bp0, NULL, NULL, true, 0, 0, m_caster->GetGUID());
+    }
+
     float speedxy = float(m_spellInfo->EffectMiscValue[effIndex])/10;
     float speedz = float(damage/10);
     if (!speedxy)
