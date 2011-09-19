@@ -2929,6 +2929,10 @@ void Spell::EffectHeal(SpellEffIndex /*effIndex*/)
                 m_caster->CastSpell(m_caster, 81206, true); // Chakra: Sanctuary
                 break;
         }
+	if (m_caster->HasAura(92364))
+    {
+        if (m_spellInfo->Id == 33763 || roll_chance_i(4))      //rank 1
+            m_caster->CastSpell(m_caster,16870,true);
     }
 }
 
