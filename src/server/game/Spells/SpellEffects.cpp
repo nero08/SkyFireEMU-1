@@ -1669,6 +1669,17 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
                 // Bloodthirst
                 case 23881:
                 {
+					  int chance = 0;
+                    if (m_caster->HasSpell(46913))
+                        chance = 10;
+                    else if(m_caster->HasSpell(46914))
+                        chance = 20;
+                    else if(m_caster->HasSpell(46915))
+                        chance = 30;
+
+                    if (roll_chance_f(chance))
+                        m_caster->CastSpell(m_caster, 46916, true);
+
                     m_caster->CastCustomSpell(unitTarget, 23885, &damage, NULL, NULL, true, NULL);
                     return;
                 }
