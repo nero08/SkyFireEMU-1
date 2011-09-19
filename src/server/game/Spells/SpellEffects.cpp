@@ -1913,6 +1913,25 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
                 }
                 return;
             }
+			 switch (m_spellInfo->Id)
+            {
+                case 73680:       //Unleash Elements
+                    if (m_caster->GetAura(8017))
+                        m_caster->CastSpell(unitTarget,73684,true);
+                else
+                    if (m_caster->GetAura(51730))
+                        m_caster->CastSpell(unitTarget,73685,true);
+                else
+                    if (m_caster->GetAura(8232))
+                        m_caster->CastSpell(unitTarget,73681,true);
+                else
+                    if (m_caster->GetAura(8033))
+                        m_caster->CastSpell(unitTarget,73682,true);
+                else
+                    if (m_caster->GetAura(8024))
+                        m_caster->CastSpell(unitTarget,73683,true);
+                break;
+            }
             break;
         case SPELLFAMILY_DEATHKNIGHT:
             // Hungering Cold
