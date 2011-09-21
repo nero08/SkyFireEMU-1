@@ -10491,7 +10491,11 @@ uint32 Unit::SpellDamageBonus(Unit *pVictim, SpellEntry const *spellProto, uint3
                 {
                     // Glyph of Ice Lance
                     if (owner->HasAura(56377) && pVictim->getLevel() > owner->getLevel())
-                        DoneTotalMod *= 1.05f;
+                         pdamage += pdamage * 4.0f / 100;
+                    else if(owner->HasAura(44544))
+                        pdamage += pdamage * 22.0f / 100;
+                    else
+                        pdamage += pdamage * 3.5f / 100;
                 }
             }
 
