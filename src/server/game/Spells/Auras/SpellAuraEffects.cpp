@@ -2405,6 +2405,10 @@ void AuraEffect::TriggerSpell(Unit *target, Unit *caster) const
                     case 23170:
                         triggerSpellId = 23171;
                         return;
+					case 19578:
+                    case 20895:
+                        if (target->isPet() && caster->GetGUID() == target->GetOwnerGUID()) { }
+                            else return;
                     // Restoration
                     case 24379:
                     case 23493:
