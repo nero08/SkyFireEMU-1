@@ -1987,6 +1987,12 @@ void AuraEffect::PeriodicTick(AuraApplication * aurApp, Unit * caster) const
             sLog->outDetail("PeriodicTick: %u (TypeId: %u) energize %u (TypeId: %u) for %u dmg inflicted by %u",
                 GUID_LOPART(GetCasterGUID()), GuidHigh2TypeId(GUID_HIPART(GetCasterGUID())), target->GetGUIDLow(), target->GetTypeId(), amount, GetId());
 
+            if(GetBase()->GetId() == 6117)
+            {
+                if(target->HasAura(56383)) //Glyph of Mage Armor
+                    amount += amount * 0.2; //+20% bonus
+            }
+
             SpellPeriodicAuraLogInfo pInfo(this, amount, 0, 0, 0, 0.0f, false);
             target->SendPeriodicAuraLog(&pInfo);
 
