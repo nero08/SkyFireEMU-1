@@ -1435,6 +1435,20 @@ void AuraEffect::PeriodicTick(AuraApplication * aurApp, Unit * caster) const
                             return;
                         }
                         break;
+					case 8050: // Flame Shock
+                    {
+                        if(caster->HasAura(77755))
+                        {
+                            if (roll_chance_i(10)) // rank 1
+                                caster->ToPlayer()->RemoveSpellCooldown(51505, true);
+                        }
+                        else if(caster->HasAura(77756))
+                        {
+                            if (roll_chance_i(20)) // rank 2
+                                caster->ToPlayer()->RemoveSpellCooldown(51505, true);
+                        }
+                    }
+                    break;
                     case 38772: // Grievous Wound
                     {
                         uint32 percent =
