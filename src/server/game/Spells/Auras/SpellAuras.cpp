@@ -1178,6 +1178,27 @@ void Aura::HandleAuraSpecificMods(AuraApplication const * aurApp, Unit * caster,
                     }
                 }
                 break;
+			case SPELLFAMILY_HUNTER:
+                // Glyph of Freezing Trap
+                if (GetSpellProto()->SpellFamilyFlags[0] & 0x00000008)
+                    if (caster && caster->HasAura(56845))
+                        target->CastSpell(target, 61394, true);
+                // Wyvern Sting
+                // If implemented through spell_linked_spell it can't proc from breaking by damage
+                if (removeMode != AURA_REMOVE_BY_STACK && removeMode != AURA_REMOVE_BY_DEATH &&
+                    GetSpellProto()->SpellFamilyFlags[1] & 0x1000 && caster)
+                {
+                    if(GetId() == 19386)
+                        caster->CastSpell(target, 24131, true);
+                }
+                // Animal Handler
+                if (GetId() == 68361)
+                {
+                    if (Unit* owner = target->GetOwner())
+                        if (AuraEffect* auraEff = owner->GetDummyAuraEffect(SPELLFAMILY_HUNTER, 2234, 1))
+                            GetEffect(0)->SetAmount(auraEff->GetAmount());
+                }
+                break;
         }
     }
     // mods at aura remove
