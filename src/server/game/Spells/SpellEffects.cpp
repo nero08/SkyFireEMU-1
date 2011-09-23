@@ -4849,6 +4849,9 @@ void Spell::SpellDamageWeaponDmg(SpellEffIndex effIndex)
         }
         case SPELLFAMILY_ROGUE:
         {
+			// Temp hack
+            if (m_spellInfo->Id == 53)
+                totalDamagePercentMod *= 1.2f;
             // Fan of Knives, Hemorrhage, Ghostly Strike
             if ((m_spellInfo->SpellFamilyFlags[1] & 0x40000)
                 || (m_spellInfo->SpellFamilyFlags[0] & 0x6000000))
