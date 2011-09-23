@@ -759,6 +759,16 @@ void Spell::SpellDamageSchoolDmg(SpellEffIndex effIndex)
                         }
                     }
                 }
+				//Mind Spike
+                if (m_spellInfo->Id == 8092 || m_spellInfo->Id == 73510)
+                {
+                    Aura const* dummy = m_caster->GetAura(77487);
+                    if (dummy)
+                    {
+                        damage += dummy->GetStackAmount() * m_caster->ToPlayer()->getLevel() * 1.82f;
+                        m_caster->RemoveAurasDueToSpell(77487);
+                    }
+                }
                 break;
             }
             case SPELLFAMILY_DRUID:
