@@ -4094,6 +4094,18 @@ void SpellMgr::LoadSpellCustomAttr()
             spellInfo->EffectTriggerSpell[0] = 0;
             count++;
             break;
+		case 77486:
+            spellInfo->EffectTriggerSpell[0] = 0;
+            count++;
+            break;
+        case 33191: case 78228:
+            spellInfo->EffectTriggerSpell[1] = 0;
+            count++;
+            break;
+        case 87192: case 87195: //Paralysis
+            spellInfo->EffectTriggerSpell[0] = 0;
+            count++;
+            break;
         case 38794: case 33711: //Murmur's Touch
             spellInfo->MaxAffectedTargets = 1;
             spellInfo->EffectTriggerSpell[0] = 33760;
