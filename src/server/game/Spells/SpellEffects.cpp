@@ -1833,6 +1833,7 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
                         else
                             m_caster->CastSpell(unitTarget, 79101, true); // Blessing of Might (Caster)
                     }
+					unitTarget->RemoveAurasDueToSpell(79062);
                     break;
                 }
                 case 20217: // Blessing of Kings
@@ -1854,6 +1855,7 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
                         else
                             m_caster->CastSpell(unitTarget, 79062, true); // Blessing of Kings (Caster)
                     }
+					unitTarget->RemoveAurasDueToSpell(79101);
                     break;
                 }
                 case 31789: // Righteous Defense (step 1)
