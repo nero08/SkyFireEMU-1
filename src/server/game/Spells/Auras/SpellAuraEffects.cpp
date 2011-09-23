@@ -1545,6 +1545,9 @@ void AuraEffect::PeriodicTick(AuraApplication * aurApp, Unit * caster) const
             caster->ApplyResilience(target, &dmg);
             damage = dmg;
 
+			if(m_spellProto->Id == 53301)
+                damage = caster->ToPlayer()->GetTotalAttackPowerValue(RANGED_ATTACK) * 0.232f + 368;
+
             caster->CalcAbsorbResist(target, GetSpellSchoolMask(GetSpellProto()), DOT, damage, &absorb, &resist, m_spellProto);
 
             sLog->outDetail("PeriodicTick: %u (TypeId: %u) attacked %u (TypeId: %u) for %u dmg inflicted by %u abs is %u",
