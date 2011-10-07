@@ -1,4 +1,4 @@
-// $Id: OS_NS_sys_msg.cpp 91286 2010-08-05 09:04:31Z johnnyw $
+// $Id: OS_NS_sys_msg.cpp 92837 2010-12-08 17:31:02Z johnnyw $
 
 #include "ace/OS_NS_sys_msg.h"
 

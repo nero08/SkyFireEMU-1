@@ -8764,7 +8764,7 @@ bool Unit::HandleProcTriggerSpell(Unit *pVictim, uint32 damage, AuraEffect* trig
             {
                 if (!ToPlayer()->HasSpellCooldown(trigger_spell_id))
                 {
-                    AddAura(trigger_spell_id, this);        
+                    AddAura(trigger_spell_id, this);
                     ToPlayer()->AddSpellCooldown(trigger_spell_id, 0, time(NULL) + 120);
                 }
             }
@@ -10491,11 +10491,7 @@ uint32 Unit::SpellDamageBonus(Unit *pVictim, SpellEntry const *spellProto, uint3
                 {
                     // Glyph of Ice Lance
                     if (owner->HasAura(56377) && pVictim->getLevel() > owner->getLevel())
-                         pdamage += pdamage * 4.0f / 100;
-                    else if(owner->HasAura(44544))
-                        pdamage += pdamage * 22.0f / 100;
-                    else
-                        pdamage += pdamage * 3.5f / 100;
+                        DoneTotalMod *= 1.05f;
                 }
             }
 

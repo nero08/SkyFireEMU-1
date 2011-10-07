@@ -10,7 +10,7 @@
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, 
+ * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
@@ -19,7 +19,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-
 
 #include "Log.h"
 #include "DBCFileLoader.h"
@@ -159,7 +158,7 @@ void SQLStorageLoaderBase<T>::Load(SQLStorage& store)
     if (store.iNumFields != result->GetFieldCount())
     {
         store.RecordCount = 0;
-		sLog->outError("Error loading table %s, probably table format was updated (there should be %u fields in sql).\n", store.table, store.iNumFields);
+        sLog->outError("Error loading table %s, probably table format was updated (there should be %u fields in sql).\n", store.table, store.iNumFields);
         exit(1);                                            // Stop server at loading broken or non-compatible table.
     }
 

@@ -4043,6 +4043,10 @@ void SpellMgr::LoadSpellCustomAttr()
         case 85114: 
             spellInfo->Targets = TARGET_UNIT_TARGET_ENEMY;
             break;
+        case 85113:  // Aftermath
+        case 85114:
+            spellInfo->Targets = TARGET_UNIT_TARGET_ENEMY;
+            break;
         case 31818: // Life Tap
             spellInfo->Effect[0] = SPELL_EFFECT_ENERGIZE_PCT;
             break;
@@ -4501,16 +4505,16 @@ void SpellMgr::LoadSpellCustomAttr()
             spellInfo->Effect[1] = 0;
             count++;
             break;
-		case 87959: // Drink
-			spellInfo->Category = 59;
-			spellInfo->EffectApplyAuraName[1] = SPELL_AURA_MOD_POWER_REGEN;
-			count++;
-			break;
-		case 86150: // Guardian of Ancient Kings
-			spellInfo->EffectTriggerSpell[0] = 86698;
-			spellInfo->EffectImplicitTargetA[0] = TARGET_UNIT_CASTER;
-			count++;
-			break;
+       case 87959: // Drink
+            spellInfo->Category = 59;
+            spellInfo->EffectApplyAuraName[1] = SPELL_AURA_MOD_POWER_REGEN;
+            count++;
+            break;
+      case 86150: // Guardian of Ancient Kings
+           spellInfo->EffectTriggerSpell[0] = 86698;
+           spellInfo->EffectImplicitTargetA[0] = TARGET_UNIT_CASTER;
+           count++;
+           break;
         default:
             break;
         }

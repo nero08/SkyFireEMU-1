@@ -38,7 +38,7 @@ enum PaladinSpells
     SPELL_BLESSING_OF_LOWER_CITY_PALADIN         = 37879,
     SPELL_BLESSING_OF_LOWER_CITY_PRIEST          = 37880,
     SPELL_BLESSING_OF_LOWER_CITY_SHAMAN          = 37881,
-	SPELL_GUARDIAN_OF_ANCIENT_KINGS              = 86150
+    SPELL_GUARDIAN_OF_ANCIENT_KINGS              = 86150
 };
 
 // 31850 - Ardent Defender
@@ -253,8 +253,7 @@ public:
                                         return false;
                         return true;
                 }
-        
-        
+
         void HandleDummy(SpellEffIndex /*effIndex*/)
         {
             if (Unit *unitTarget = GetHitUnit())
@@ -263,13 +262,13 @@ public:
                 GetCaster()->CastSpell(GetCaster(), spell_id, true);
             }
         }
-        
+
         void Register()
         {
             OnEffect += SpellEffectFn(spell_pal_guardian_kings_SpellScript::HandleDummy, EFFECT_0, SPELL_EFFECT_DUMMY);
         }
         };
-        
+
         SpellScript *GetSpellScript() const
     {
         return new spell_pal_guardian_kings_SpellScript();
@@ -281,5 +280,5 @@ void AddSC_paladin_spell_scripts()
     new spell_pal_ardent_defender();
     new spell_pal_blessing_of_faith();
     new spell_pal_holy_shock();
-	new spell_pal_guardian_kings();
+    new spell_pal_guardian_kings();
 }
